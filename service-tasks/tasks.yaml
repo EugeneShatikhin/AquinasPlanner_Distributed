@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-tasks
+spec:
+  selector:
+    app: service-tasks
+  type: NodePort
+  ports:
+    - name: http
+      port: 8082
+      nodePort: 30002
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-tasks
+spec:
+  selector:
+    matchLabels:
+      app: service-tasks
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-tasks
+    spec:
+      containers:
+        - name: server
+          image: legoyoda/service-tasks:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8082
