@@ -1,7 +1,7 @@
 package com.aquinas.servicetasks.service;
 
 import com.aquinas.servicetasks.repository.TaskRepo;
-import com.aquinas.servicetasks.repository.api.dto.GroupDTO;
+import com.aquinas.servicetasks.api.dto.GroupDTO;
 import com.aquinas.servicetasks.repository.model.Task;
 import com.aquinas.servicetasks.repository.model.TaskType;
 import lombok.RequiredArgsConstructor;

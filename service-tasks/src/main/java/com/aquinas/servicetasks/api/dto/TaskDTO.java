@@ -1,4 +1,4 @@
-package com.aquinas.servicetasks.repository.api.dto;
+package com.aquinas.servicetasks.api.dto;
 
 import com.aquinas.servicetasks.repository.model.TaskType;
 import lombok.Data;

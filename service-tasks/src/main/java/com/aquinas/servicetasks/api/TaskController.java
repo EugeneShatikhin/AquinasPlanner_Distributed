@@ -1,6 +1,6 @@
-package com.aquinas.servicetasks.repository.api;
+package com.aquinas.servicetasks.api;
 
-import com.aquinas.servicetasks.repository.api.dto.TaskDTO;
+import com.aquinas.servicetasks.api.dto.TaskDTO;
 import com.aquinas.servicetasks.repository.model.Task;
 import com.aquinas.servicetasks.repository.model.TaskType;
 import com.aquinas.servicetasks.service.TaskService;
