@@ -23,8 +23,8 @@ import java.util.Optional;
 @Service
 public final class GroupService {
     private final GroupRepo groupRepo;
-    private final String userUrl = "http://service-users:8080/users/";
-    private final String taskUrl = "http://service-tasks:8082/tasks/";
+    private final String userUrl = "http://localhost:8080/users/";
+    private final String taskUrl = "http://localhost:8082/tasks/";
     public List<Group> fetchAll() {
         return groupRepo.findAll();
     }

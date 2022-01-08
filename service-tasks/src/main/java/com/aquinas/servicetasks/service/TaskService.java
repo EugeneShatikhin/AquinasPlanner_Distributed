@@ -21,7 +21,7 @@ import java.util.Optional;
 @Service
 public final class TaskService {
     private final TaskRepo taskRepo;
-    private final String groupUrl = "http://service-groups:8081/groups/";
+    private final String groupUrl = "http://localhost:8081/groups/";
     public List<Task> fetchAll() {
         return taskRepo.findAll();
     }

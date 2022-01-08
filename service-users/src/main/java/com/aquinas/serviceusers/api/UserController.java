@@ -1,7 +1,9 @@
 package com.aquinas.serviceusers.api;
 
 import com.aquinas.serviceusers.api.dto.GroupDTO;
+import com.aquinas.serviceusers.api.dto.TaskDTO;
 import com.aquinas.serviceusers.api.dto.UserDTO;
+import com.aquinas.serviceusers.api.dto.UserTasksDTO;
 import com.aquinas.serviceusers.repository.model.User;
 import com.aquinas.serviceusers.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -39,6 +43,26 @@ public class UserController {
             final List<GroupDTO> groups = userService.getGroupsByOwnerId(id);
 
             return ResponseEntity.ok(groups);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/{id}/tasks")
+    public ResponseEntity<JSONObject> showTasksById(@PathVariable long id, Optional<String> showingTill) {
+        try {
+            final List<UserTasksDTO> tasks;
+            if(showingTill.isPresent()) {
+                tasks = userService.getTasksByUserId(id, Timestamp.valueOf(showingTill.get()));
+            }
+            else {
+                tasks = userService.getTasksByUserId(id, null);
+            }
+            JSONObject response = new JSONObject();
+            response.put("Filter deadline", (showingTill.isPresent()) ? showingTill : "no deadline");
+            String s = String.format("Tasks for user %s", userService.fetchById(id).getUsername());
+            if (tasks.isEmpty()) response.put(s, "no tasks found within deadline");
+            else response.put(s, tasks);
+            return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
         }
